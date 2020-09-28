@@ -118,3 +118,12 @@ test('unsubscribe', function () {
     e.triggerAsync();
     expect(counter).toEqual(1);
 });
+test('unsubscribeAll', function () {
+    var e = new TypeEvent_1.TypeEvent();
+    e.subscribe(function () { return console.log('1'); });
+    e.subscribe(function () { return console.log('2'); });
+    e.once(function () { return console.log('3'); });
+    e.unsubscribeAll();
+    expect(e.countOfOnceSubscribers).toEqual(0);
+    expect(e.countOfSubscribers).toEqual(0);
+});

@@ -15,6 +15,7 @@ export declare class TypeEvent<F extends (...args: any) => TypeEventResult> {
      */
     once(onceAction: F): void;
     unsubscribe(action: F): void;
+    unsubscribeAll(): void;
     triggerAsync(...p: Parameters<F>): Promise<void>;
     readonly countOfSubscribers: number;
     readonly countOfOnceSubscribers: number;

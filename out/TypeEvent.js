@@ -98,6 +98,10 @@ var TypeEvent = /** @class */ (function () {
         //     } else break
         // } 
     };
+    TypeEvent.prototype.unsubscribeAll = function () {
+        this._actions = [];
+        this._onceActions = [];
+    };
     TypeEvent.prototype.triggerAsync = function () {
         var p = [];
         for (var _i = 0; _i < arguments.length; _i++) {
