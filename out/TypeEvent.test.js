@@ -38,16 +38,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var TypeEvent_1 = require("./TypeEvent");
 test('(one)', function () { return __awaiter(void 0, void 0, void 0, function () {
-    var e, countOfTriggersUsual, countOfTriggersOnce;
+    var e, countOfTriggersUsual, countOfTriggersOnce, countOfTriggerWithUnsubscribe;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 e = new TypeEvent_1.TypeEvent();
                 countOfTriggersUsual = 0;
                 countOfTriggersOnce = 0;
+                countOfTriggerWithUnsubscribe = 0;
                 e.subscribe(function () {
                     countOfTriggersUsual++;
                     //console.log('hello from subscriber')
+                });
+                e.subscribe(function () {
+                    countOfTriggerWithUnsubscribe++;
                     return { unsubscribe: true };
                 });
                 e.once(function () {
@@ -74,7 +78,10 @@ test('(one)', function () { return __awaiter(void 0, void 0, void 0, function ()
                 console.log('countOfTriggersUsual=', countOfTriggersUsual);
                 console.log('countofTriggersOnce=', countOfTriggersOnce);
                 expect(e.countOfOnceSubscribers).toEqual(0);
-                expect(e.countOfSubscribers).toEqual(0);
+                expect(e.countOfSubscribers).toEqual(1);
+                expect(countOfTriggersOnce).toEqual(2);
+                expect(countOfTriggerWithUnsubscribe).toEqual(1);
+                expect(countOfTriggersUsual).toEqual(3);
                 return [2 /*return*/];
         }
     });
@@ -98,3 +105,16 @@ test('multiparams', function () { return __awaiter(void 0, void 0, void 0, funct
         }
     });
 }); });
+test('unsubscribe', function () {
+    var e = new TypeEvent_1.TypeEvent();
+    var counter = 0;
+    var eventHandler = function () {
+        console.log('event is triggered');
+        counter++;
+    };
+    e.subscribe(eventHandler);
+    e.triggerAsync();
+    e.unsubscribe(eventHandler);
+    e.triggerAsync();
+    expect(counter).toEqual(1);
+});

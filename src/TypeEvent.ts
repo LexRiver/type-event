@@ -1,4 +1,5 @@
-export class TypeEvent<F extends (...args:any)=>void|undefined|{unsubscribe:boolean}|Promise<void|undefined|{unsubscribe:boolean}>>{
+export type TypeEventResult = void|undefined|{unsubscribe:boolean}|Promise<void|undefined|{unsubscribe:boolean}>
+export class TypeEvent<F extends (...args:any)=>TypeEventResult>{
     protected _actions:F[] = []
     protected _onceActions:F[] = []
     //protected _maxCountOfSubscribers:number|undefined = undefined
@@ -28,6 +29,11 @@ export class TypeEvent<F extends (...args:any)=>void|undefined|{unsubscribe:bool
         //         this._actions.splice(index, 1)
         //     } else break
         // } 
+    }
+
+    unsubscribeAll(){
+        this._actions = []
+        this._onceActions = []
     }
     async triggerAsync(...p:Parameters<F>){
         const actionsToDelete:F[] = []

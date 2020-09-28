@@ -65,3 +65,13 @@ test('unsubscribe', () => {
     expect(counter).toEqual(1)
 })
 
+test('unsubscribeAll', () => {
+    const e = new TypeEvent<()=>void>()
+    e.subscribe(() => console.log('1'))
+    e.subscribe(() => console.log('2'))
+    e.once(() => console.log('3'))
+    e.unsubscribeAll()
+    expect(e.countOfOnceSubscribers).toEqual(0)
+    expect(e.countOfSubscribers).toEqual(0)
+})
+

@@ -112,3 +112,20 @@ e.subscribe(() => {
 console.log(e.countOfSubscribers) // 1
 console.log(e.countOfOnceSubscribers) // 2
 ```
+
+<br/>
+<br/>
+
+## Unsubscribe all
+
+Unsubscribe all handlers from event
+
+```typescript
+const e = new TypeEvent()
+e.subscribe(() => 0)
+e.subscribe(() => 1)
+e.once(() => 2)
+e.unsubscribeAll()
+e.countOfSubscribers // 0
+e.countofOnceSubscribers // 0
+```

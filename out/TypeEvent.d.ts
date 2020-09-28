@@ -1,8 +1,9 @@
-export declare class TypeEvent<F extends (...args: any) => void | undefined | {
+export declare type TypeEventResult = void | undefined | {
     unsubscribe: boolean;
 } | Promise<void | undefined | {
     unsubscribe: boolean;
-}>> {
+}>;
+export declare class TypeEvent<F extends (...args: any) => TypeEventResult> {
     maxCountOfSubscribers: number | undefined;
     protected _actions: F[];
     protected _onceActions: F[];
