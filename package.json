@@ -6,7 +6,7 @@
     "exports": "./out/src/TypeEvent.mjs",
     "scripts": {
         "test": "vitest",
-        "build": "tsc"
+        "build": "rimraf out && tsc"
     },
     "keywords": [
         "type",
