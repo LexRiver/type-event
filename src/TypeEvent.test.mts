@@ -1,4 +1,5 @@
-import { TypeEvent } from "./TypeEvent"
+import { expect, test } from 'vitest'
+import { TypeEvent } from "./TypeEvent.mjs"
 
 test('(one)', async () => {
     const e = new TypeEvent()
