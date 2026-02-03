@@ -32,7 +32,7 @@ e.subscribe((a,b) => {
 })
 
 // triggering event
-await e.triggerAsync(100,200)
+await e.trigger(100,200)
 
 console.log(sum) // 300
 ```
@@ -65,10 +65,10 @@ const eventHandler = () => {
     counter++
 }
 e.subscribe(eventHandler)
-e.triggerAsync()
+e.trigger()
 
 e.unsubscribe(eventHandler)
-e.triggerAsync()
+e.trigger()
 
 console.log(counter) // 1
 
@@ -85,8 +85,8 @@ let counter = 0
 e.once(() => {
     counter++
 })
-e.triggerAsync()
-e.triggerAsync()
+e.trigger()
+e.trigger()
 console.log(counter) // 1
 ```
 
