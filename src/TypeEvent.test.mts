@@ -18,14 +18,14 @@ test('(one)', async () => {
         countOfTriggersOnce++
         //console.log('hello from once subscriber')
     })
-    await e.triggerAsync()
+    await e.trigger()
     e.once(() => {
         countOfTriggersOnce++
         //console.log('hello from another once subscriber')
     })
-    await e.triggerAsync()
+    await e.trigger()
     //console.log('now expectin no output')
-    await e.triggerAsync()
+    await e.trigger()
 
     console.log('countOfTriggersUsual=', countOfTriggersUsual)
     console.log('countofTriggersOnce=', countOfTriggersOnce)
@@ -46,7 +46,7 @@ test('multiparams', async() => {
         sum = x + y + z
     })
 
-    await e.triggerAsync(100,200,300)
+    await e.trigger(100,200,300)
 
     expect(sum).toEqual(600)
 
@@ -60,9 +60,9 @@ test('unsubscribe', () => {
         counter++
     }
     e.subscribe(eventHandler)
-    e.triggerAsync()
+    e.trigger()
     e.unsubscribe(eventHandler)
-    e.triggerAsync()
+    e.trigger()
     expect(counter).toEqual(1)
 })
 

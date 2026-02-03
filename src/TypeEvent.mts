@@ -35,7 +35,7 @@ export class TypeEvent<F extends (...args:any)=>TypeEventResult>{
         this._actions = []
         this._onceActions = []
     }
-    async triggerAsync(...p:Parameters<F>){
+    async trigger(...p:Parameters<F>){
         const actionsToDelete:F[] = []
         for(let action of this._actions){
             let result = await action(...p)
